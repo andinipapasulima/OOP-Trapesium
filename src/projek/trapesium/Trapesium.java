@@ -1,26 +1,34 @@
 package projek.trapesium;
 
-// Trapesium mewarisi BangunGeometri (Inheritance)
 public class Trapesium extends BangunGeometri {
+
     public double alasAtas;
     public double alasBawah;
     public double tinggi;
 
-    public Trapesium(String nama, double alasAtas, double alasBawah, double tinggi) {
-        super(nama); // Mengirim nama ke abstract class induk
-        this.alasAtas = alasAtas;
-        this.alasBawah = alasBawah;
-        this.tinggi = tinggi;
+    // Constructor 1 - hanya nama, nilai default 0 (OVERLOADING)
+    public Trapesium(String nama) {
+        super(nama);
+        this.alasAtas  = 0;
+        this.alasBawah = 0;
+        this.tinggi    = 0;
     }
 
-    // Melakukan Overriding terhadap method abstract milik induk
+    // Constructor 2 - dengan semua parameter (OVERLOADING)
+    public Trapesium(String nama, double alasAtas, double alasBawah, double tinggi) {
+        super(nama);
+        this.alasAtas  = alasAtas;
+        this.alasBawah = alasBawah;
+        this.tinggi    = tinggi;
+    }
+
     @Override
     public void hitung() {
-        double selisih = (alasBawah - alasAtas) / 2.0;
-        double miring = Math.sqrt((selisih * selisih) + (tinggi * tinggi));
-        
-        this.luas = 0.5 * (alasAtas + alasBawah) * tinggi;
-        this.keliling = alasAtas + alasBawah + (2 * miring);
-        this.volume = 0; 
+        double selisihAlas = Math.abs(alasBawah - alasAtas) / 2.0;
+        double miring      = Math.sqrt((selisihAlas * selisihAlas) + (tinggi * tinggi));
+
+        this.luas     = 0.5 * (alasAtas + alasBawah) * tinggi;
+        this.keliling = alasAtas + alasBawah + (2.0 * miring);
+        this.volume   = 0.0;
     }
 }
