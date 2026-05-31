@@ -1,6 +1,5 @@
 package projek.trapesium;
 
-// Menambahkan pilar Abstract Class demi nilai akademik yang sempurna
 public abstract class BangunGeometri implements Runnable {
     protected String nama;
     public double luas;
