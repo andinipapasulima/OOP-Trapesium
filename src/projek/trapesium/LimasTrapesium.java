@@ -4,13 +4,11 @@ public class LimasTrapesium extends Trapesium {
 
     public double tinggiLimas;
 
-    // Constructor 1 - hanya nama, tinggiLimas default 0 (OVERLOADING)
     public LimasTrapesium(String nama) {
         super(nama);
         this.tinggiLimas = 0;
     }
 
-    // Constructor 2 - dengan semua parameter (OVERLOADING)
     public LimasTrapesium(String nama, double alasAtas, double alasBawah,
                           double tinggi, double tinggiLimas) {
         super(nama, alasAtas, alasBawah, tinggi);

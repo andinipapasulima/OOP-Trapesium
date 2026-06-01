@@ -6,7 +6,6 @@ public class Trapesium extends BangunGeometri {
     public double alasBawah;
     public double tinggi;
 
-    // Constructor 1 - hanya nama, nilai default 0 (OVERLOADING)
     public Trapesium(String nama) {
         super(nama);
         this.alasAtas  = 0;
@@ -14,7 +13,6 @@ public class Trapesium extends BangunGeometri {
         this.tinggi    = 0;
     }
 
-    // Constructor 2 - dengan semua parameter (OVERLOADING)
     public Trapesium(String nama, double alasAtas, double alasBawah, double tinggi) {
         super(nama);
         this.alasAtas  = alasAtas;

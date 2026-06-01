@@ -4,13 +4,11 @@ public class PrismaTrapesium extends Trapesium {
 
     public double tinggiPrisma;
 
-    // Constructor 1 - hanya nama, tinggiPrisma default 0 (OVERLOADING)
     public PrismaTrapesium(String nama) {
         super(nama);
         this.tinggiPrisma = 0;
     }
 
-    // Constructor 2 - dengan semua parameter (OVERLOADING)
     public PrismaTrapesium(String nama, double alasAtas, double alasBawah,
                            double tinggi, double tinggiPrisma) {
         super(nama, alasAtas, alasBawah, tinggi);

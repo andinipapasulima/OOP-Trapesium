@@ -10,10 +10,8 @@ public abstract class BangunGeometri implements Runnable {
         this.nama = nama;
     }
 
-    // Method abstract yang wajib diturunkan dan diisi oleh anak-anaknya
     public abstract void hitung();
 
-    // Implementasi Runnable dari interface bawaan Java (Multithreading)
     @Override
     public void run() {
         hitung();

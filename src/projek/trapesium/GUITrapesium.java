@@ -10,7 +10,6 @@ public class GUITrapesium extends JFrame {
     public JTextArea txtHasil;
     public JButton btnHitung, btnReset;
 
-    // Palet Warna Kustom Modern
     private final Color COLOR_PRIMARY    = new Color(41, 128, 185);  // Biru Elegan
     private final Color COLOR_WARNING    = new Color(243, 156, 18);  // Kuning Amber
     private final Color COLOR_BG_PANEL   = new Color(245, 247, 250); // Abu-abu Terang
@@ -18,24 +17,21 @@ public class GUITrapesium extends JFrame {
 
     public GUITrapesium() {
         setTitle("Kalkulator Geometri Trapesium Pro");
-        setSize(480, 580); // Ukuran sedikit dilebarkan agar ideal
+        setSize(480, 580);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
-        // Root Panel Utama
         JPanel pnlMain = new JPanel(new BorderLayout(15, 15));
         pnlMain.setBackground(COLOR_BG_PANEL);
         pnlMain.setBorder(new EmptyBorder(15, 15, 15, 15));
         setContentPane(pnlMain);
 
-        // --- ZONA ATAS: FORM INPUT MENGGUNAKAN GRIDBAGLAYOUT (ANTI BERANTAKAN) ---
         JPanel pnlInput = new JPanel(new GridBagLayout());
         pnlInput.setBackground(COLOR_BG_PANEL);
         GridBagConstraints gbc = new GridBagConstraints();
         
-        // Pengaturan dasar GridBagLayout
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(6, 6, 6, 6); // Jarak antar komponen (top, left, bottom, right)
+        gbc.insets = new Insets(6, 6, 6, 6);
 
         Font fontLabel = new Font("Segoe UI", Font.BOLD, 12);
         Font fontField = new Font("Segoe UI", Font.PLAIN, 13);
@@ -81,7 +77,7 @@ public class GUITrapesium extends JFrame {
         gbc.gridx = 1; gbc.gridy = 4; gbc.weightx = 0.7;
         txtTinggi3D = createStyledTextField("0", fontField);
         txtTinggi3D.setEnabled(false);
-        txtTinggi3D.setBackground(new Color(210, 215, 222)); // Abu-abu gelap penanda terkunci
+        txtTinggi3D.setBackground(new Color(210, 215, 222));
         pnlInput.add(txtTinggi3D, gbc);
 
         pnlMain.add(pnlInput, BorderLayout.NORTH);
@@ -125,7 +121,6 @@ public class GUITrapesium extends JFrame {
         btnReset.setFocusPainted(false);
         btnReset.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        // Memberikan tinggi seragam yang ideal bagi tombol lewat preferredSize
         btnHitung.setPreferredSize(new Dimension(0, 40));
         btnReset.setPreferredSize(new Dimension(0, 40));
 
