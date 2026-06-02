@@ -2,11 +2,12 @@ package projek.trapesium;
 
 public class PrismaTrapesium extends Trapesium {
 
+    public double volume;
+    public double luasPermukaan;
     public double tinggiPrisma;
 
     public PrismaTrapesium(String nama) {
         super(nama);
-        this.tinggiPrisma = 0;
     }
 
     public PrismaTrapesium(String nama, double alasAtas, double alasBawah,
@@ -16,12 +17,16 @@ public class PrismaTrapesium extends Trapesium {
     }
 
     @Override
-    public void hitung() {
+    public void hitung(){
+        hitung(this.alasAtas, this.alasBawah, this.tinggi, this.tinggiPrisma);
+    }
+    
+    public void hitung(double aAtas, double aBawah, double tAlas, double tPrisma) {
         super.hitung();
-        double luasAlasTrapesium    = this.luas;
-        double kelilingAlasTrapesium = this.keliling;
+        double luasAlas    = this.luas;
+        double kelilingAlas = this.keliling;
 
-        this.volume = luasAlasTrapesium * tinggiPrisma;
-        this.luas   = (2.0 * luasAlasTrapesium) + (kelilingAlasTrapesium * tinggiPrisma);
+        this.volume = luasAlas * tinggiPrisma;
+        this.luasPermukaan   = (2.0 * luasAlas) + (kelilingAlas * tinggiPrisma);
     }
 }

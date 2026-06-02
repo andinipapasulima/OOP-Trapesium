@@ -2,11 +2,12 @@ package projek.trapesium;
 
 public class LimasTrapesium extends Trapesium {
 
+    public double volume;
+    public double luasPermukaan;
     public double tinggiLimas;
 
     public LimasTrapesium(String nama) {
         super(nama);
-        this.tinggiLimas = 0;
     }
 
     public LimasTrapesium(String nama, double alasAtas, double alasBawah,
@@ -16,16 +17,19 @@ public class LimasTrapesium extends Trapesium {
     }
 
     @Override
-    public void hitung() {
-        super.hitung();
-        double luasAlasTrapesium  = this.luas;
+    public void hitung(){
+        hitung(this.alasAtas, this.alasBawah, this.tinggi, this.tinggiLimas);
+    }
+    public void hitung(double aAtas, double aBawah, double tAlas, double tLimas) {
+        super.hitung(); 
+        double luasAlas          = this.luas;
         double setengahTinggiAlas = tinggi / 2.0;
         double apothem            = Math.sqrt((setengahTinggiAlas * setengahTinggiAlas)
                                             + (tinggiLimas * tinggiLimas));
         double luasSelimutSegitiga = 0.5 * alasBawah * apothem;
         double totalLuasSelimut   = 4.0 * luasSelimutSegitiga;
 
-        this.volume = (1.0 / 3.0) * luasAlasTrapesium * tinggiLimas;
-        this.luas   = luasAlasTrapesium + totalLuasSelimut;
+        this.volume = (1.0 / 3.0) * luasAlas * tinggiLimas;
+        this.luasPermukaan   = luasAlas + totalLuasSelimut;
     }
 }
