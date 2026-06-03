@@ -21,15 +21,15 @@ public class LimasTrapesium extends Trapesium {
         hitung(this.alasAtas, this.alasBawah, this.tinggi, this.tinggiLimas);
     }
     public void hitung(double aAtas, double aBawah, double tAlas, double tLimas) {
-        super.hitung(); 
+        super.hitung(aAtas, aBawah, tAlas); 
         double luasAlas          = this.luas;
-        double setengahTinggiAlas = tinggi / 2.0;
+        double setengahTinggiAlas = tAlas / 2.0;
         double apothem            = Math.sqrt((setengahTinggiAlas * setengahTinggiAlas)
-                                            + (tinggiLimas * tinggiLimas));
-        double luasSelimutSegitiga = 0.5 * alasBawah * apothem;
+                                            + (tLimas * tLimas));
+        double luasSelimutSegitiga = 0.5 * aBawah * apothem;
         double totalLuasSelimut   = 4.0 * luasSelimutSegitiga;
 
-        this.volume = (1.0 / 3.0) * luasAlas * tinggiLimas;
+        this.volume = (1.0 / 3.0) * luasAlas * tLimas;
         this.luasPermukaan   = luasAlas + totalLuasSelimut;
     }
 }
