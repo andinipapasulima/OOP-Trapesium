@@ -12,19 +12,6 @@ import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * ============================================================
- * KELAS UTAMA: GuiTrapesium (JFrame Entry Point)
- * ============================================================
- * Mendesain GUI dengan konsep Top Navigation Dashboard yang
- * elegan dan futuristik untuk menghindari kemiripan visual dengan
- * proyek pihak lain (Anti-Plagiarisme).
- * * Fitur Utama:
- * 1. Home Dashboard: Memaparkan dokumentasi konsep OOP & Multithreading.
- * 2. Manual Calculator: Input interaktif dengan live preview console.
- * 3. Core Thread Visualizer: Monitor parallel processing real-time.
- * 4. Dynamic Data Log Table: Menyimpan seluruh riwayat eksekusi thread.
- */
 public class GUITrapesium extends JFrame {
 
     // Komponen Navigasi Utama
@@ -488,7 +475,7 @@ public class GUITrapesium extends JFrame {
 
             // Aturan matematika dasar trapesium
             if (a <= 0 || b <= 0 || t <= 0 || ki <= 0 || ka <= 0) {
-                throw new IllegalArgumentException("Dimensi dimensi tidak boleh kurang dari atau sama dengan nol!");
+                throw new IllegalArgumentException("Dimensi tidak boleh kurang dari atau sama dengan nol!");
             }
             if (b <= a) {
                 throw new IllegalArgumentException("Panjang Sisi Bawah (b) harus lebih besar dari Sisi Atas (a)!");
@@ -1069,165 +1056,4 @@ final class UIHelper {
             return new Insets(4, 4, 4, 4);
         }
     }
-}
-
-// ============================================================
-// HIERARKI MODEL GEOMETRI (Polimorfisme, Abstraksi, & Threads)
-// ============================================================
-
-/** Kontrak Perhitungan Geometri 2 Dimensi */
-interface Geometri2D {
-    double hitungLuas();
-    double hitungKeliling();
-}
-
-/** Kontrak Perhitungan Geometri 3 Dimensi */
-interface Geometri3D {
-    double hitungVolume();
-    double hitungLuasPermukaan();
-}
-
-/** 1. Abstract Class Induk Geometri (Kontribusi Multithreading) */
-abstract class BangunGeometri implements Runnable {
-    protected String nama;
-
-    public BangunGeometri(String nama) {
-        this.nama = nama;
-    }
-
-    public abstract void hitung();
-
-    @Override
-    public void run() {
-        hitung();
-        System.out.printf("[%s] => Selesai Menghitung '%s'.%n", Thread.currentThread().getName(), nama);
-    }
-
-    public String getNama() { return nama; }
-}
-
-/** 2. Concrete Subclass: Trapesium 2D */
-class Trapesium extends BangunGeometri implements Geometri2D {
-    public double atas, bawah, tinggi, kiri, kanan;
-    public double luas, keliling;
-
-    // Overloading Constructor 1
-    public Trapesium(String nama) {
-        super(nama);
-        this.atas = this.bawah = this.tinggi = this.kiri = this.kanan = 0;
-    }
-
-    // Overloading Constructor 2
-    public Trapesium(String nama, double atas, double bawah, double tinggi, double kiri, double kanan) {
-        super(nama);
-        this.atas = atas;
-        this.bawah = bawah;
-        this.tinggi = tinggi;
-        this.kiri = kiri;
-        this.kanan = kanan;
-    }
-
-    @Override
-    public void hitung() {
-        // Memicu Overloading Perhitungan yang Direkomendasikan Dosen
-        hitung(this.atas, this.bawah, this.tinggi, this.kiri, this.kanan);
-    }
-
-    // OVERLOADING Method Perhitungan dengan Parameter Langsung (State-Independent)
-    public void hitung(double aAtas, double aBawah, double tAlas, double sKiri, double sKanan) {
-        this.luas = 0.5 * (aAtas + aBawah) * tAlas;
-        this.keliling = aAtas + aBawah + sKiri + sKanan;
-    }
-
-    @Override
-    public double hitungLuas() { return this.luas; }
-    @Override
-    public double hitungKeliling() { return this.keliling; }
-}
-
-/** 3. Concrete Subclass: Prisma Trapesium 3D (Pewarisan Bertingkat) */
-class PrismaTrapesium extends Trapesium implements Geometri3D {
-    public double tinggiPrisma;
-    public double volume, luasPermukaan;
-
-    // Overloading Constructor 1
-    public PrismaTrapesium(String nama) {
-        super(nama);
-        this.tinggiPrisma = 0;
-    }
-
-    // Overloading Constructor 2
-    public PrismaTrapesium(String nama, double atas, double bawah, double tinggi, double kiri, double kanan, double tinggiPrisma) {
-        super(nama, atas, bawah, tinggi, kiri, kanan);
-        this.tinggiPrisma = tinggiPrisma;
-    }
-
-    @Override
-    public void hitung() {
-        // Memicu Overriding dari Induk
-        super.hitung();
-        // Memicu Overloading Perhitungan Prisma
-        hitung(this.luas, this.keliling, this.tinggiPrisma);
-    }
-
-    // OVERLOADING Method Perhitungan Prisma
-    public void hitung(double luasAlas, double kelilingAlas, double tPrisma) {
-        this.volume = luasAlas * tPrisma;
-        this.luasPermukaan = (2.0 * luasAlas) + (kelilingAlas * tPrisma);
-    }
-
-    @Override
-    public double hitungVolume() { return this.volume; }
-    @Override
-    public double hitungLuasPermukaan() { return this.luasPermukaan; }
-}
-
-/** 4. Concrete Subclass: Limas Trapesium 3D (Pewarisan Bertingkat) */
-class LimasTrapesium extends Trapesium implements Geometri3D {
-    public double tinggiLimas;
-    public double volume, luasPermukaan;
-    public double apotemaDepanBelakang, apotemaKiriKanan;
-
-    // Overloading Constructor 1
-    public LimasTrapesium(String nama) {
-        super(nama);
-        this.tinggiLimas = 0;
-    }
-
-    // Overloading Constructor 2
-    public LimasTrapesium(String nama, double atas, double bawah, double tinggi, double kiri, double kanan, double tinggiLimas) {
-        super(nama, atas, bawah, tinggi, kiri, kanan);
-        this.tinggiLimas = tinggiLimas;
-    }
-
-    @Override
-    public void hitung() {
-        // Memicu Overriding dari Induk
-        super.hitung();
-        // Memicu Overloading Perhitungan Limas
-        hitung(this.atas, this.bawah, this.tinggi, this.kiri, this.kanan, this.tinggiLimas);
-    }
-
-    // OVERLOADING Method Perhitungan Limas (Presisi Pythagoras Ruang)
-    public void hitung(double a, double b, double t, double ki, double ka, double tl) {
-        double proyeksiDB = t / 2.0;
-        double proyeksiKK = b / 2.0;
-
-        this.apotemaDepanBelakang = Math.sqrt((proyeksiDB * proyeksiDB) + (tl * tl));
-        this.apotemaKiriKanan = Math.sqrt((proyeksiKK * proyeksiKK) + (tl * tl));
-
-        double lSegitigaDepan  = 0.5 * a  * this.apotemaDepanBelakang;
-        double lSegitigaBelakang = 0.5 * b * this.apotemaDepanBelakang;
-        double lSegitigaKiri   = 0.5 * ki * this.apotemaKiriKanan;
-        double lSegitigaKanan  = 0.5 * ka * this.apotemaKiriKanan;
-
-        double totalSelimut = lSegitigaDepan + lSegitigaBelakang + lSegitigaKiri + lSegitigaKanan;
-        this.luasPermukaan = (0.5 * (a + b) * t) + totalSelimut;
-        this.volume = (1.0 / 3.0) * (0.5 * (a + b) * t) * tl;
-    }
-
-    @Override
-    public double hitungVolume() { return this.volume; }
-    @Override
-    public double hitungLuasPermukaan() { return this.luasPermukaan; }
 }
