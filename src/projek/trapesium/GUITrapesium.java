@@ -477,9 +477,6 @@ public class GUITrapesium extends JFrame {
             if (a <= 0 || b <= 0 || t <= 0 || ki <= 0 || ka <= 0) {
                 throw new IllegalArgumentException("Dimensi tidak boleh kurang dari atau sama dengan nol!");
             }
-            if (b <= a) {
-                throw new IllegalArgumentException("Panjang Sisi Bawah (b) harus lebih besar dari Sisi Atas (a)!");
-            }
 
             long startWaktu = System.currentTimeMillis();
 

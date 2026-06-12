@@ -36,7 +36,6 @@ public class Trapesium extends BangunGeometri implements Geometri2D{
         if (tinggi <= 0) throw new IllegalArgumentException("tinggi harus lebih besar dari 0, nilai saat ini: " + tinggi);
         if (kiri <= 0) throw new IllegalArgumentException ("Sisi kiri harus lebih besar dari 0, nilai saat ini: " + kiri);
         if (kanan <= 0) throw new IllegalArgumentException ("Sisi kanan harus lebih besar dari 0, nilai saat ini: " + kanan);
-        if (bawah <= atas) throw new IllegalArgumentException("Sisi bawah harus lebih besar dari sisi atas!");
     }
             
     @Override
