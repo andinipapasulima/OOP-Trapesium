@@ -1,32 +1,51 @@
 package projek.trapesium;
 
-public class PrismaTrapesium extends Trapesium {
+public class PrismaTrapesium extends Trapesium implements Geometri3D{
 
     public double volume;
     public double luasPermukaan;
     public double tinggiPrisma;
 
-    public PrismaTrapesium(String nama) {
+    public PrismaTrapesium() {
+        super("Prisma Trapesium");
+        this.tinggiPrisma = 0;
+    }
+    
+    public PrismaTrapesium(String nama){
         super(nama);
     }
 
-    public PrismaTrapesium(String nama, double alasAtas, double alasBawah,
-                           double tinggi, double tinggiPrisma) {
-        super(nama, alasAtas, alasBawah, tinggi);
+    public PrismaTrapesium(String nama, double atas, double bawah,
+                           double tinggi,double kiri, double kanan, double tinggiPrisma) {
+        super(nama, atas, bawah, tinggi, kiri, kanan);
+        if (tinggiPrisma <= 0){
+            throw new IllegalArgumentException("Tinggi prisma harus lebih besar dari 0, nilai saat ini: " + tinggiPrisma);
+        }
         this.tinggiPrisma = tinggiPrisma;
     }
 
     @Override
     public void hitung(){
-        hitung(this.alasAtas, this.alasBawah, this.tinggi, this.tinggiPrisma);
+        super.hitung();
+        hitungVolume();
+        hitungLuasPermukaan();
     }
     
-    public void hitung(double aAtas, double aBawah, double tAlas, double tPrisma) {
-        super.hitung(aAtas, aBawah, tAlas);
-        double luasAlas    = this.luas;
-        double kelilingAlas = this.keliling;
-
-        this.volume = luasAlas * tPrisma;
-        this.luasPermukaan   = (2.0 * luasAlas) + (kelilingAlas * tPrisma);
+    @Override
+    public double hitungVolume(){
+        this.volume = this.luas * this.tinggiPrisma;
+        return this.volume;
+    }
+    
+    @Override
+    public double hitungLuasPermukaan(){
+        this.luasPermukaan = (2.0 * this.luas) + (this.keliling * this.tinggiPrisma);
+        return this.luasPermukaan;
+    }
+    
+    @Override
+    public String toString(){
+        return String.format("PrismaTrapesium[atas=%.2f, bawah=%.2f, tinggi=%.2f, kiri=%.2f, kanan=%.2f, tinggiPrisma=%.2f]",
+                atas, bawah, tinggi, kiri, kanan, tinggiPrisma);
     }
 }

@@ -12,6 +12,10 @@ public abstract class BangunGeometri implements Runnable {
     @Override
     public void run() {
         hitung();
-        System.out.println(nama + " sukses diproses oleh " + Thread.currentThread().getName());
+        System.out.printf("[%s] => Perhitungan '%s' selesai diproses.%n",
+            Thread.currentThread().getName(), nama);
+    }
+    public String getNama(){
+        return nama;
     }
 }

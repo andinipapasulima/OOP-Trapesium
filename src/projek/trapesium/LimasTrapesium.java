@@ -1,35 +1,67 @@
 package projek.trapesium;
 
-public class LimasTrapesium extends Trapesium {
+public class LimasTrapesium extends Trapesium implements Geometri3D {
 
     public double volume;
     public double luasPermukaan;
     public double tinggiLimas;
+    public double apotemaDepanBelakang;
+    public double apotemaKiriKanan;
 
-    public LimasTrapesium(String nama) {
+    public LimasTrapesium() {
+        super("Limas Trapesium");
+        this.tinggiLimas = 0;
+    }
+    
+    public LimasTrapesium(String nama){
         super(nama);
     }
-
-    public LimasTrapesium(String nama, double alasAtas, double alasBawah,
-                          double tinggi, double tinggiLimas) {
-        super(nama, alasAtas, alasBawah, tinggi);
+    
+    public LimasTrapesium(String nama, double atas, double bawah,
+                          double tinggi, double kiri, double kanan, double tinggiLimas) {
+        super(nama, atas, bawah, tinggi, kiri, kanan);
+        if (tinggiLimas <= 0){
+            throw new IllegalArgumentException("Tinggi limas harus lebih besar dari 0, nilai saat ini: " + tinggiLimas);
+        }
         this.tinggiLimas = tinggiLimas;
     }
 
     @Override
     public void hitung(){
-        hitung(this.alasAtas, this.alasBawah, this.tinggi, this.tinggiLimas);
+        super.hitung();
+        hitungApotema();
+        hitungVolume();
+        hitungLuasPermukaan();
     }
-    public void hitung(double aAtas, double aBawah, double tAlas, double tLimas) {
-        super.hitung(aAtas, aBawah, tAlas); 
-        double luasAlas          = this.luas;
-        double setengahTinggiAlas = tAlas / 2.0;
-        double apothem            = Math.sqrt((setengahTinggiAlas * setengahTinggiAlas)
-                                            + (tLimas * tLimas));
-        double luasSelimutSegitiga = 0.5 * aBawah * apothem;
-        double totalLuasSelimut   = 4.0 * luasSelimutSegitiga;
-
-        this.volume = (1.0 / 3.0) * luasAlas * tLimas;
-        this.luasPermukaan   = luasAlas + totalLuasSelimut;
+    
+    public void hitungApotema(){
+        double proyeksiDB = (this.tinggi / 2.0);
+        double proyeksiKK = (this.bawah / 2.0);
+        this.apotemaDepanBelakang = Math.sqrt((proyeksiDB * proyeksiDB) + (tinggiLimas * tinggiLimas));
+        this.apotemaKiriKanan = Math.sqrt((proyeksiKK * proyeksiKK) + (tinggiLimas * tinggiLimas));
+    }
+    
+    @Override
+    public double hitungVolume(){
+        this.volume = (1.0/3.0) * this.luas * this.tinggiLimas;
+        return this.volume;
+    }
+    
+    @Override 
+    public double hitungLuasPermukaan(){
+        double luasSegitigaDepan = 0.5 * this.atas * this.apotemaDepanBelakang;
+        double luasSegitigaBelakang = 0.5 * this.bawah * this.apotemaDepanBelakang;
+        double luasSegitigaKiri = 0.5 * this.kiri * this.apotemaKiriKanan;
+        double luasSegitigaKanan = 0.5 * this.kanan * this.apotemaKiriKanan;
+        
+        double totalSelimut = luasSegitigaDepan + luasSegitigaBelakang + luasSegitigaKiri + luasSegitigaKanan;
+        this.luasPermukaan = this.luas + totalSelimut;
+        return this.luasPermukaan;
+    }
+    
+    @Override
+    public String toString(){
+        return String.format("LimasTrapesium[atas=%.2f, bawah=%.2f, tinggi=%.2f, kiri=%.2f, kanan=%.2f, tinggiLimas=%.2f]",
+                atas, bawah, tinggi, kiri, kanan, tinggiLimas);
     }
 }
