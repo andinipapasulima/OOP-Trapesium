@@ -518,8 +518,23 @@ public class GUITrapesium extends JFrame {
         sb.append(String.format(" Diproses Oleh   : %s\n", "Manual-Worker-Thread"));
         sb.append(String.format(" Durasi Proses   : %d ms\n", durasi));
         sb.append("--------------------------------------------------------\n");
-
-        if (bangun instanceof Trapesium) {
+        
+        if (bangun instanceof PrismaTrapesium) {
+            PrismaTrapesium prisma = (PrismaTrapesium) bangun;
+            sb.append(String.format(" Tinggi Bangun Ruang : %s m\n", df.format(prisma.tinggiPrisma)));
+            sb.append("--------------------------------------------------------\n");
+            sb.append(String.format(" Hasil Volume        : %s m³\n", df.format(prisma.volume)));
+            sb.append(String.format(" Hasil Luas Permukaan: %s m²\n", df.format(prisma.luasPermukaan)));
+            
+        } else if (bangun instanceof LimasTrapesium) {
+            LimasTrapesium limas = (LimasTrapesium) bangun;
+            sb.append(String.format(" Tinggi Bangun Ruang : %s m\n", df.format(limas.tinggiLimas)));
+            sb.append("--------------------------------------------------------\n");
+            sb.append(String.format(" Hasil Volume        : %s m³\n", df.format(limas.volume)));
+            sb.append(String.format(" Hasil Luas Permukaan: %s m²\n", df.format(limas.luasPermukaan)));
+            sb.append(String.format(" Apotema Samping A   : %s m (Depan/Belakang)\n", df.format(limas.apotemaDepanBelakang)));
+            sb.append(String.format(" Apotema Samping B   : %s m (Kiri/Kanan)\n", df.format(limas.apotemaKiriKanan)));
+        } else if (bangun instanceof Trapesium) {
             Trapesium trap = (Trapesium) bangun;
             sb.append(String.format(" Sisi Alas Atas (a)  : %s m\n", df.format(trap.atas)));
             sb.append(String.format(" Sisi Alas Bawah (b) : %s m\n", df.format(trap.bawah)));
@@ -529,22 +544,6 @@ public class GUITrapesium extends JFrame {
             sb.append("--------------------------------------------------------\n");
             sb.append(String.format(" Hasil Luas Alas     : %s m²\n", df.format(trap.luas)));
             sb.append(String.format(" Hasil Keliling Alas : %s m\n", df.format(trap.keliling)));
-        }
-
-        if (bangun instanceof PrismaTrapesium) {
-            PrismaTrapesium prisma = (PrismaTrapesium) bangun;
-            sb.append(String.format(" Tinggi Bangun Ruang : %s m\n", df.format(prisma.tinggiPrisma)));
-            sb.append("--------------------------------------------------------\n");
-            sb.append(String.format(" Hasil Volume        : %s m³\n", df.format(prisma.volume)));
-            sb.append(String.format(" Hasil Luas Permukaan: %s m²\n", df.format(prisma.luasPermukaan)));
-        } else if (bangun instanceof LimasTrapesium) {
-            LimasTrapesium limas = (LimasTrapesium) bangun;
-            sb.append(String.format(" Tinggi Bangun Ruang : %s m\n", df.format(limas.tinggiLimas)));
-            sb.append("--------------------------------------------------------\n");
-            sb.append(String.format(" Hasil Volume        : %s m³\n", df.format(limas.volume)));
-            sb.append(String.format(" Hasil Luas Permukaan: %s m²\n", df.format(limas.luasPermukaan)));
-            sb.append(String.format(" Apotema Samping A   : %s m (Depan/Belakang)\n", df.format(limas.apotemaDepanBelakang)));
-            sb.append(String.format(" Apotema Samping B   : %s m (Kiri/Kanan)\n", df.format(limas.apotemaKiriKanan)));
         }
 
         sb.append("========================================================");
