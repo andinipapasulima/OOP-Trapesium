@@ -30,7 +30,7 @@ public class Trapesium extends BangunGeometri implements Geometri2D{
         this.kanan = kanan;
     }
     
-    protected void validasiDimensi (double atas, double bawah, double tinggi, double kiri, double kanan){
+    public void validasiDimensi (double atas, double bawah, double tinggi, double kiri, double kanan){
         if (atas <= 0) throw new IllegalArgumentException("Sisi atas harus lebih besar dari 0, nilai saat ini: " + atas);
         if (bawah <= 0) throw new IllegalArgumentException ("Sisi bawah harus lebih besar dari 0, nilai saat ini: " + bawah);
         if (tinggi <= 0) throw new IllegalArgumentException("tinggi harus lebih besar dari 0, nilai saat ini: " + tinggi);
